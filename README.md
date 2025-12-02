@@ -2,6 +2,24 @@
 
 A personal portfolio landing page combining Matrix movie aesthetics with 8-bit gaming style, built with Next.js 14, TypeScript, and Tailwind CSS.
 
+## Table of Contents
+
+- [Features](#-features)
+- [Getting Started](#-getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Project Structure](#-project-structure)
+- [Design System](#-design-system)
+  - [Color Palette](#color-palette)
+  - [Typography](#typography)
+- [Available Scripts](#-available-scripts)
+- [Tech Stack](#-tech-stack)
+- [Development Phases](#-development-phases)
+- [Customization](#-customization)
+- [Deployment](#-deployment)
+- [License](#-license)
+- [Easter Eggs](#-easter-eggs)
+
 ## 🎯 Features
 
 - **Matrix Theme**: Digital rain background effects and green terminal aesthetics
