@@ -10,7 +10,7 @@ export const hobbies: Hobby[] = [
     id: "hobby-1",
     name: "Motocross",
     description: "Dirt biking and off-road adventures",
-    icon: "🏍️"
+    icon: "🏁" // Motocross racing flag
   },
   {
     id: "hobby-2",
@@ -22,7 +22,7 @@ export const hobbies: Hobby[] = [
     id: "hobby-3",
     name: "Windsurfing",
     description: "Riding wind and waves",
-    icon: "🏄"
+    icon: "🪂" // Windsurfing sail (parachute as closest alternative)
   },
   {
     id: "hobby-4",
@@ -34,7 +34,7 @@ export const hobbies: Hobby[] = [
     id: "hobby-5",
     name: "Roller Skating",
     description: "Rolling through the streets",
-    icon: "🛼"
+    icon: "⛸️" // Inline skates
   },
   {
     id: "hobby-6",
