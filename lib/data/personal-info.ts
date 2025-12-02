@@ -1,18 +1,18 @@
 export const personalInfo = {
-  name: "Your Name",
-  role: "Senior Developer",
-  email: "your.email@example.com",
-  location: "Your Location",
+  name: "Vladimir Yakovenko",
+  role: "Python Developer",
+  email: "dremdem@gmail.com",
+  location: "Remote",
   bio: [
-    "Hi! I'm a passionate developer with X years of experience building innovative solutions. I specialize in full-stack development, cloud architecture, and creating seamless user experiences.",
-    "I believe in writing clean, maintainable code and collaborating with teams to deliver exceptional products. My approach combines technical expertise with creative problem-solving to build solutions that make a difference.",
-    "When I'm not coding, you'll find me exploring new technologies, contributing to open source, or enjoying a good sci-fi book."
+    "Hi! I'm Vladimir, a Python developer with extensive experience building backend systems and data processing solutions. I specialize in FastAPI, Django, and cloud-based architectures.",
+    "I believe in writing clean, maintainable code and delivering robust solutions. My approach combines deep Python expertise with modern DevOps practices, from Docker containerization to AWS cloud deployments.",
+    "When I'm not coding, you'll find me on a dirt bike doing motocross, sailing, windsurfing, or playing drums."
   ],
   links: {
-    github: "https://github.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
-    twitter: "https://twitter.com/yourusername",
-    website: "https://yourwebsite.com"
+    github: "https://github.com/dremdem",
+    linkedin: "https://linkedin.com/in/vladimiryakovenko-7b666686",
+    telegram: "https://t.me/dremdem",
+    upwork: "https://www.upwork.com/o/profiles/users/_~011110ba92bf30ec2d/"
   },
   profileImage: "/images/profile.jpg"
 };
