@@ -1,0 +1,61 @@
+/* Matrix-specific effects and animations */
+
+.matrix-rain-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.matrix-rain-char {
+  position: absolute;
+  color: var(--matrix-green);
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  opacity: 0.8;
+  animation: matrix-fall linear infinite;
+}
+
+@keyframes matrix-fall {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+/* Matrix text glow */
+.matrix-glow {
+  text-shadow: 0 0 10px var(--matrix-green),
+               0 0 20px var(--matrix-green),
+               0 0 30px var(--matrix-green);
+}
+
+/* Matrix pulse effect */
+@keyframes matrix-pulse {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 10px var(--matrix-green);
+  }
+  50% {
+    opacity: 0.7;
+    text-shadow: 0 0 20px var(--matrix-green),
+                 0 0 30px var(--matrix-green);
+  }
+}
+
+.matrix-pulse {
+  animation: matrix-pulse 2s ease-in-out infinite;
+}
