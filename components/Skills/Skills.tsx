@@ -42,7 +42,7 @@ export default function Skills() {
               className="mb-8"
             >
               <h2 className="font-pixel text-2xl md:text-3xl text-matrix-green mb-2">
-                {'>> SKILL_TREE.exe'}
+                {'>> SKILL_TREE.sh'}
               </h2>
               <div className="h-1 w-24 bg-matrix-green"></div>
             </motion.div>
