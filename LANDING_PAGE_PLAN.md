@@ -204,7 +204,7 @@ XP GAINED: [Tech stack badges]
 │  ║           │ 📧 Email         │ ║ │
 │  ║           │ 💼 LinkedIn      │ ║ │
 │  ║           │ 🐙 GitHub        │ ║ │
-│  ║           │ 🐦 Twitter/X     │ ║ │
+│  ║           │ 📄 CV (PDF/MD)   │ ║ │
 │  ║           └──────────────────┘ ║ │
 │  ║                                ║ │
 │  ╚════════════════════════════════╝ │
@@ -218,7 +218,8 @@ XP GAINED: [Tech stack badges]
   $ send email → [email]
   $ connect linkedin → [LinkedIn URL]
   $ view github → [GitHub URL]
-  $ follow twitter → [Twitter handle]
+  $ download cv-pdf → [CV PDF URL]
+  $ view cv-md → [CV Markdown URL]
   ```
 - Social media icons in 8-bit style
 - Interactive hover effects (power-up sounds)
@@ -482,10 +483,11 @@ Required:
   - Profile photo (high quality)
 
 Optional:
-  - Twitter/X handle
   - Personal blog
   - Stack Overflow
   - Other relevant platforms
+  - CV in PDF format
+  - CV in Markdown format
 ```
 
 ### About Section (Keep it Simple)
