@@ -518,7 +518,7 @@ Required:
   - Professional email
   - LinkedIn profile
   - GitHub profile
-  - Profile photo (high quality): https://github.com/dremdem/cv/blob/master/cv_image.png
+  - Profile photo (high quality)
 
 Optional:
   - Personal blog

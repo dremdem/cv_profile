@@ -14,5 +14,5 @@ export const personalInfo = {
     telegram: "https://t.me/dremdem",
     upwork: "https://www.upwork.com/o/profiles/users/_~011110ba92bf30ec2d/"
   },
-  profileImage: "/images/profile.jpg" // Use: https://github.com/dremdem/cv/blob/master/cv_image.png
+  profileImage: "/images/profile.png"
 };
