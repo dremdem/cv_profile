@@ -32,12 +32,12 @@ export default function Hero() {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
-              className="w-32 h-32 mx-auto border-4 border-matrix-green rounded-lg pixel-art overflow-hidden"
+              className="w-32 h-32 mx-auto border-4 border-matrix-green rounded-lg pixel-art overflow-hidden bg-matrix-dark"
             >
               <img
                 src={personalInfo.profileImage}
                 alt={personalInfo.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </motion.div>
 

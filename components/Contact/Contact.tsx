@@ -68,7 +68,7 @@ export default function Contact() {
                     <img
                       src={personalInfo.profileImage}
                       alt={personalInfo.name}
-                      className="aspect-square object-cover w-full"
+                      className="w-full object-contain bg-gray-100"
                     />
                   </div>
                   <div className="mt-3 text-center">
