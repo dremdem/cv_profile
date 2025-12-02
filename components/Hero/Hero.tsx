@@ -27,14 +27,18 @@ export default function Hero() {
 
           {/* Profile Section */}
           <div className="space-y-6 py-8">
-            {/* Pixel Art Profile Photo Placeholder */}
+            {/* Pixel Art Profile Photo */}
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
-              className="w-32 h-32 mx-auto bg-matrix-green/20 border-4 border-matrix-green rounded-lg pixel-art flex items-center justify-center"
+              className="w-32 h-32 mx-auto border-4 border-matrix-green rounded-lg pixel-art overflow-hidden"
             >
-              <span className="font-pixel text-4xl text-matrix-green">?</span>
+              <img
+                src={personalInfo.profileImage}
+                alt={personalInfo.name}
+                className="w-full h-full object-cover"
+              />
             </motion.div>
 
             {/* Name with Glitch Effect */}
