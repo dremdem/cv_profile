@@ -62,7 +62,19 @@ export default function Hero() {
               className="font-terminal text-xl md:text-2xl text-matrix-cyan"
             >
               <span className="mr-2">{'>'}</span>
-              <span>{personalInfo.role}</span>
+              <TypeAnimation
+                sequence={[
+                  personalInfo.role,
+                  2000,
+                  'Problem Solver',
+                  2000,
+                  'Code Enthusiast',
+                  2000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
               <span className="animate-blink">_</span>
             </motion.div>
 
