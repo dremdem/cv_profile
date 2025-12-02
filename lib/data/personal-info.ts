@@ -1,6 +1,6 @@
 export const personalInfo = {
   name: "Vladimir Yakovenko",
-  role: "Python Developer",
+  role: "Python Backend Developer",
   email: "dremdem@gmail.com",
   location: "Thailand (UTC+7)",
   locationNote: "Working remotely, flexible with any timezone",
