@@ -23,6 +23,12 @@ export default function SocialLinks({ inView }: SocialLinksProps) {
       icon: '📧',
     },
     {
+      command: 'telegram',
+      label: 'dremdem',
+      url: personalInfo.links.telegram,
+      icon: '✈️',
+    },
+    {
       command: 'linkedin',
       label: 'vladimiryakovenko-7b666686',
       url: personalInfo.links.linkedin,
