@@ -82,6 +82,7 @@ export default function About() {
               <div className="border-l-4 border-matrix-green pl-4">
                 <p className="font-terminal text-matrix-cyan text-sm">LOCATION</p>
                 <p className="font-code text-ghost text-sm">{personalInfo.location}</p>
+                <p className="font-code text-matrix-green-dark text-xs mt-1">{personalInfo.locationNote}</p>
               </div>
               <div className="border-l-4 border-matrix-cyan pl-4">
                 <p className="font-terminal text-matrix-cyan text-sm">CONTACT</p>

@@ -65,10 +65,11 @@ export default function Contact() {
                 <div className="relative group">
                   <div className="absolute inset-0 bg-matrix-green opacity-20 blur-xl group-hover:opacity-30 transition-opacity"></div>
                   <div className="relative border-4 border-matrix-green p-1 bg-matrix-dark">
-                    {/* Placeholder for profile photo */}
-                    <div className="aspect-square bg-matrix-green-dark flex items-center justify-center">
-                      <span className="text-6xl">👤</span>
-                    </div>
+                    <img
+                      src={personalInfo.profileImage}
+                      alt={personalInfo.name}
+                      className="w-full"
+                    />
                   </div>
                   <div className="mt-3 text-center">
                     <p className="font-terminal text-matrix-green text-lg">
