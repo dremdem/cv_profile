@@ -3,6 +3,44 @@
 ## Overview
 A personal portfolio landing page combining Matrix movie aesthetics with 8-bit gaming style, built with modern web technologies.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Project Goals](#-project-goals)
+- [Visual Design Concept](#-visual-design-concept)
+  - [Theme: Matrix × 8-Bit Retro Gaming](#theme-matrix--8-bit-retro-gaming)
+  - [Color Palette](#color-palette)
+  - [Visual Elements](#visual-elements)
+  - [Typography](#typography)
+- [Layout Structure](#-layout-structure)
+  - [1. Hero Section](#1-hero-section-full-viewport)
+  - [2. About Section](#2-about-section)
+  - [3. Skills Section](#3-skills-section)
+  - [4. Experience Section](#4-experience-section)
+  - [5. Contact Section](#5-contact-section)
+  - [6. Hobbies Section](#6-hobbies-section-brief)
+- [Technical Architecture](#-technical-architecture)
+  - [Tech Stack](#tech-stack)
+  - [Project Structure](#project-structure)
+  - [Key Features Implementation](#key-features-implementation)
+- [Animation Strategy](#-animation-strategy)
+- [Accessibility](#-accessibility)
+- [Content Guidelines](#-content-guidelines)
+- [Development Phases](#-development-phases)
+  - [Phase 1: Setup & Foundation](#phase-1-setup--foundation-day-1-2)
+  - [Phase 2: Core Components](#phase-2-core-components-day-3-5)
+  - [Phase 3: Content Sections](#phase-3-content-sections-day-6-7)
+  - [Phase 4: Polish & Animations](#phase-4-polish--animations-day-8-9)
+  - [Phase 5: Optimization & Deploy](#phase-5-optimization--deploy-day-10)
+- [Responsive Behavior](#-responsive-behavior)
+- [Design Assets Needed](#-design-assets-needed)
+- [Configuration Files](#-configuration-files)
+- [Success Metrics](#-success-metrics)
+- [Next Steps](#-next-steps)
+- [Optional Enhancements](#-optional-enhancements-future)
+- [Easter Eggs Ideas](#-easter-eggs-ideas)
+- [Resources & References](#-resources--references)
+
 ---
 
 ## 🎯 Project Goals
@@ -558,29 +596,31 @@ Purpose:
 
 ### Phase 1: Setup & Foundation (Day 1-2)
 ```
-☐ Initialize Next.js project with TypeScript
-☐ Configure Tailwind CSS
-☐ Set up project structure
-☐ Install required dependencies
-☐ Configure fonts (VT323, Press Start 2P, Fira Code)
-☐ Create base layout and global styles
-☐ Set up color palette and design tokens
+✅ Initialize Next.js project with TypeScript
+✅ Configure Tailwind CSS
+✅ Set up project structure
+✅ Install required dependencies
+✅ Configure fonts (VT323, Press Start 2P, Fira Code)
+✅ Create base layout and global styles
+✅ Set up color palette and design tokens
 ```
+**Status**: ✅ Complete
 
 ### Phase 2: Core Components (Day 3-5)
 ```
-☐ Build Hero section
+⏳ Build Hero section
   ☐ Matrix rain background
   ☐ Typewriter effect
   ☐ Profile photo with effects
-☐ Create About section
+⏳ Create About section
   ☐ Terminal-style container
   ☐ Content layout
-☐ Develop Skills section
+⏳ Develop Skills section
   ☐ Skill bars with animations
   ☐ Badge components
   ☐ Responsive grid
 ```
+**Status**: ⏳ In Progress
 
 ### Phase 3: Content Sections (Day 6-7)
 ```
