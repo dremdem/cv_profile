@@ -17,33 +17,33 @@ interface SocialLinksProps {
 export default function SocialLinks({ inView }: SocialLinksProps) {
   const socialLinks: SocialLink[] = [
     {
-      command: 'send',
+      command: 'email',
       label: personalInfo.email,
       url: `mailto:${personalInfo.email}`,
       icon: '📧',
     },
     {
-      command: 'connect',
+      command: 'linkedin',
       label: 'vladimiryakovenko-7b666686',
       url: personalInfo.links.linkedin,
       icon: '💼',
     },
     {
-      command: 'view',
+      command: 'github',
       label: 'dremdem',
       url: personalInfo.links.github,
       icon: '🐙',
     },
     {
-      command: 'download',
-      label: 'CV (PDF)',
-      url: '/cv.pdf',
+      command: 'cv-pdf',
+      label: 'yakovenko_python_en.pdf',
+      url: 'https://github.com/dremdem/cv/blob/master/yakovenko_python_en.pdf',
       icon: '📄',
     },
     {
-      command: 'view',
-      label: 'CV (MD)',
-      url: '/cv.md',
+      command: 'cv-md',
+      label: 'yakovenko_python_en.md',
+      url: 'https://github.com/dremdem/cv/blob/master/yakovenko_python_en.md',
       icon: '📝',
     },
   ];
