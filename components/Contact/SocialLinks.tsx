@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { personalInfo } from '@/lib/data/personal-info';
 
 interface SocialLink {
   command: string;
@@ -17,20 +18,20 @@ export default function SocialLinks({ inView }: SocialLinksProps) {
   const socialLinks: SocialLink[] = [
     {
       command: 'send',
-      label: 'EMAIL',
-      url: 'mailto:your.email@example.com',
+      label: personalInfo.email,
+      url: `mailto:${personalInfo.email}`,
       icon: '📧',
     },
     {
       command: 'connect',
-      label: 'LINKEDIN',
-      url: 'https://linkedin.com/in/yourusername',
+      label: 'vladimiryakovenko-7b666686',
+      url: personalInfo.links.linkedin,
       icon: '💼',
     },
     {
       command: 'view',
-      label: 'GITHUB',
-      url: 'https://github.com/yourusername',
+      label: 'dremdem',
+      url: personalInfo.links.github,
       icon: '🐙',
     },
     {
