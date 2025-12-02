@@ -2,7 +2,8 @@ export const personalInfo = {
   name: "Vladimir Yakovenko",
   role: "Python Developer",
   email: "dremdem@gmail.com",
-  location: "Remote",
+  location: "Thailand (UTC+7)",
+  locationNote: "Working remotely, flexible with any timezone",
   bio: [
     "Hi! I'm Vladimir, a Python developer with extensive experience building backend systems and data processing solutions. I specialize in FastAPI, Django, and cloud-based architectures.",
     "I believe in writing clean, maintainable code and delivering robust solutions. My approach combines deep Python expertise with modern DevOps practices, from Docker containerization to AWS cloud deployments.",
