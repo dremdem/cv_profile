@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Fira+Code:wght@400;500;600&display=swap');
+
+:root {
+  /* Matrix Theme Colors */
+  --matrix-green: #00FF41;
+  --matrix-green-dark: #008F11;
+  --matrix-dark: #0D0208;
+  --matrix-cyan: #00D9FF;
+
+  /* Pixel Theme Colors */
+  --pixel-red: #FF0040;
+  --pixel-gray: #1A1A1A;
+
+  /* Text Colors */
+  --ghost-white: #F8F8FF;
+  --terminal-gray: #1A1A1A;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--matrix-dark);
+  color: var(--ghost-white);
+}
+
+body {
+  font-family: 'Fira Code', monospace;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--matrix-cyan);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--matrix-green);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--matrix-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--matrix-green-dark);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--matrix-green);
+}
+
+/* Custom Cursor (optional) */
+.retro-cursor {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><rect x="0" y="0" width="16" height="16" fill="%2300FF41" /></svg>'), auto;
+}
+
+/* CRT Screen Effect */
+.crt-effect {
+  position: relative;
+}
+
+.crt-effect::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+/* Scanlines Effect */
+.scanlines {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanlines::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Pixel Art Image Rendering */
+.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Terminal Window Styling */
+.terminal-window {
+  background: var(--terminal-gray);
+  border: 2px solid var(--matrix-green);
+  border-radius: 4px;
+  padding: 1rem;
+  font-family: 'VT323', monospace;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+}
+
+.terminal-header {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--matrix-green-dark);
+}
+
+.terminal-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-button.red {
+  background: var(--pixel-red);
+}
+
+.terminal-button.yellow {
+  background: #FFD700;
+}
+
+.terminal-button.green {
+  background: var(--matrix-green);
+}
+
+/* Retro Button Styling */
+.retro-button {
+  font-family: 'Press Start 2P', monospace;
+  background: var(--matrix-green);
+  color: var(--matrix-dark);
+  border: 4px solid var(--matrix-green);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.1s ease;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.retro-button:hover {
+  background: var(--matrix-cyan);
+  border-color: var(--matrix-cyan);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+  transform: translate(-2px, -2px);
+}
+
+.retro-button:active {
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+  transform: translate(2px, 2px);
+}
+
+/* Glitch Effect */
+@keyframes glitch-animation {
+  0% {
+    clip-path: inset(40% 0 61% 0);
+  }
+  20% {
+    clip-path: inset(92% 0 1% 0);
+  }
+  40% {
+    clip-path: inset(43% 0 1% 0);
+  }
+  60% {
+    clip-path: inset(25% 0 58% 0);
+  }
+  80% {
+    clip-path: inset(54% 0 7% 0);
+  }
+  100% {
+    clip-path: inset(58% 0 43% 0);
+  }
+}
+
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--pixel-red);
+  animation: glitch-animation 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: 2px 0 var(--matrix-cyan);
+  animation: glitch-animation 3s infinite linear alternate-reverse;
+}
+
+/* Pixel Divider */
+.pixel-divider {
+  width: 100%;
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--matrix-green) 0px,
+    var(--matrix-green) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  margin: 2rem 0;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Smooth Scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
