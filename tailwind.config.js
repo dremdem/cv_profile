@@ -30,6 +30,11 @@ module.exports = {
         'glitch': 'glitch 0.3s infinite',
         'blink': 'blink 1s step-end infinite',
         'typewriter': 'typewriter 2s steps(20) forwards',
+        'float': 'float 3s ease-in-out infinite',
+        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+        'slide-up': 'slideUp 0.6s ease-out',
+        'shimmer': 'shimmer 2s linear infinite',
+        'power-up': 'powerUp 0.3s ease-in-out',
       },
       keyframes: {
         matrixRain: {
@@ -50,6 +55,27 @@ module.exports = {
         typewriter: {
           '0%': { width: '0' },
           '100%': { width: '100%' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        pulseGlow: {
+          '0%, 100%': { boxShadow: '0 0 5px rgba(0, 255, 65, 0.5)' },
+          '50%': { boxShadow: '0 0 20px rgba(0, 255, 65, 0.8), 0 0 30px rgba(0, 255, 65, 0.6)' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(30px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '100%': { backgroundPosition: '1000px 0' },
+        },
+        powerUp: {
+          '0%': { transform: 'scale(1)', filter: 'brightness(1)' },
+          '50%': { transform: 'scale(1.05)', filter: 'brightness(1.2)' },
+          '100%': { transform: 'scale(1)', filter: 'brightness(1)' },
         },
       },
     },

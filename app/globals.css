@@ -38,16 +38,19 @@ body {
 body {
   font-family: 'Fira Code', monospace;
   line-height: 1.6;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect x="8" y="0" width="4" height="4" fill="%2300FF41"/><rect x="4" y="4" width="4" height="4" fill="%2300FF41"/><rect x="12" y="4" width="4" height="4" fill="%2300FF41"/><rect x="8" y="4" width="4" height="4" fill="%2300FF41"/><rect x="0" y="8" width="4" height="4" fill="%2300FF41"/><rect x="16" y="8" width="4" height="4" fill="%2300FF41"/><rect x="8" y="8" width="4" height="4" fill="%2300FF41"/><rect x="4" y="12" width="4" height="4" fill="%2300FF41"/><rect x="12" y="12" width="4" height="4" fill="%2300FF41"/><rect x="8" y="12" width="4" height="4" fill="%2300FF41"/><rect x="8" y="16" width="4" height="4" fill="%2300FF41"/></svg>') 10 10, auto;
 }
 
 a {
   color: var(--matrix-cyan);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect x="4" y="4" width="4" height="4" fill="%2300D9FF"/><rect x="8" y="0" width="4" height="4" fill="%2300D9FF"/><rect x="12" y="4" width="4" height="4" fill="%2300D9FF"/><rect x="16" y="8" width="4" height="4" fill="%2300D9FF"/><rect x="12" y="12" width="4" height="4" fill="%2300D9FF"/><rect x="8" y="16" width="4" height="4" fill="%2300D9FF"/><rect x="4" y="12" width="4" height="4" fill="%2300D9FF"/><rect x="0" y="8" width="4" height="4" fill="%2300D9FF"/></svg>') 12 12, pointer;
 }
 
 a:hover {
   color: var(--matrix-green);
+  text-shadow: 0 0 8px var(--matrix-green);
 }
 
 /* Scrollbar Styling */
@@ -167,23 +170,33 @@ a:hover {
   border: 4px solid var(--matrix-green);
   padding: 0.75rem 1.5rem;
   font-size: 0.75rem;
-  cursor: pointer;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect x="4" y="4" width="4" height="4" fill="%2300D9FF"/><rect x="8" y="0" width="4" height="4" fill="%2300D9FF"/><rect x="12" y="4" width="4" height="4" fill="%2300D9FF"/><rect x="16" y="8" width="4" height="4" fill="%2300D9FF"/><rect x="12" y="12" width="4" height="4" fill="%2300D9FF"/><rect x="8" y="16" width="4" height="4" fill="%2300D9FF"/><rect x="4" y="12" width="4" height="4" fill="%2300D9FF"/><rect x="0" y="8" width="4" height="4" fill="%2300D9FF"/></svg>') 12 12, pointer;
   position: relative;
   transition: all 0.1s ease;
   text-transform: uppercase;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 65, 0);
 }
 
 .retro-button:hover {
   background: var(--matrix-cyan);
   border-color: var(--matrix-cyan);
-  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 217, 255, 0.6);
   transform: translate(-2px, -2px);
+  animation: pulse-glow 1s ease-in-out infinite;
 }
 
 .retro-button:active {
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 255, 65, 0.4);
   transform: translate(2px, 2px);
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 217, 255, 0.6);
+  }
+  50% {
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 217, 255, 0.8);
+  }
 }
 
 /* Glitch Effect */
@@ -248,6 +261,106 @@ a:hover {
   margin: 2rem 0;
 }
 
+/* Power-Up Animation */
+@keyframes power-up {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Glow Pulse Animation */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.8), 0 0 30px rgba(0, 255, 65, 0.6);
+  }
+}
+
+/* Shimmer Effect */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Slide In From Bottom */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Achievement Unlock */
+@keyframes achievement-unlock {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Pixel Fade In */
+@keyframes pixel-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Utility Classes for Animations */
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+.glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.power-up-on-hover:hover {
+  animation: power-up 0.3s ease-in-out;
+}
+
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -257,11 +370,32 @@ a:hover {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  .float-animation,
+  .glow-pulse,
+  .power-up-on-hover:hover {
+    animation: none !important;
+  }
 }
 
 /* Smooth Scrolling */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+}
+
+/* Mobile Optimizations - Simplify Animations */
+@media (max-width: 768px) {
+  .float-animation {
+    animation-duration: 4s;
+  }
+
+  .glow-pulse {
+    animation: none;
+  }
+
+  .terminal-window {
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
   }
 }
