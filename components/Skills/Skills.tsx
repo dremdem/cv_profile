@@ -14,8 +14,8 @@ export default function Skills() {
 
   const languageSkills = skills.filter(s => s.category === 'language');
   const frameworkSkills = skills.filter(s => s.category === 'framework');
+  const databaseSkills = skills.filter(s => s.category === 'database');
   const toolSkills = skills.filter(s => s.category === 'tool');
-  const softSkills = skills.filter(s => s.category === 'soft');
 
   return (
     <section id="skills" className="py-20 px-4 relative z-10">
@@ -121,32 +121,23 @@ export default function Skills() {
               </div>
             </motion.div>
 
-            {/* Soft Skills */}
+            {/* Databases */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
-              transition={{ delay: 2.4, duration: 0.5 }}
-              className="mb-4"
+              transition={{ delay: 1.5, duration: 0.5 }}
+              className="mb-8"
             >
               <h3 className="font-terminal text-matrix-cyan text-lg md:text-xl mb-4">
-                {skillCategories.soft}
+                {skillCategories.database}
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {softSkills.map((skill, index) => (
-                  <motion.div
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                {databaseSkills.map((skill, index) => (
+                  <SkillBadge
                     key={skill.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={inView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: 2.6 + index * 0.1, duration: 0.5 }}
-                    className="flex items-center gap-3"
-                  >
-                    <div className="w-8 h-8 bg-matrix-green/20 border-2 border-matrix-green flex items-center justify-center">
-                      <span className="text-matrix-green font-pixel text-xs">✓</span>
-                    </div>
-                    <span className="font-terminal text-ghost text-sm md:text-base">
-                      {skill.name}
-                    </span>
-                  </motion.div>
+                    name={skill.name}
+                    delay={1.7 + index * 0.1}
+                  />
                 ))}
               </div>
             </motion.div>
