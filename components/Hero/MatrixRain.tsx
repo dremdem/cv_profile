@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface MatrixRainProps {
   className?: string;
@@ -8,7 +8,6 @@ interface MatrixRainProps {
 
 export default function MatrixRain({ className = '' }: MatrixRainProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -17,9 +16,9 @@ export default function MatrixRain({ className = '' }: MatrixRainProps) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set canvas size with extra height for parallax
+    // Set canvas size
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight + 500;
+    canvas.height = window.innerHeight;
 
     // Matrix characters
     const matrix = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-=[]{}|;:,.<>?/';
@@ -72,22 +71,15 @@ export default function MatrixRain({ className = '' }: MatrixRainProps) {
     // Handle resize
     const handleResize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight + 500;
-    };
-
-    // Handle scroll for parallax effect
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+      canvas.height = window.innerHeight;
     };
 
     window.addEventListener('resize', handleResize);
-    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Cleanup
     return () => {
       clearInterval(interval);
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -100,17 +92,12 @@ export default function MatrixRain({ className = '' }: MatrixRainProps) {
     return null;
   }
 
-  // Parallax transform - move slower than scroll
-  const parallaxOffset = scrollY * 0.3;
-
   return (
     <canvas
       ref={canvasRef}
       className={`fixed top-0 left-0 w-full h-full pointer-events-none ${className}`}
       style={{
         zIndex: 0,
-        transform: `translateY(${parallaxOffset}px)`,
-        transition: 'transform 0.1s ease-out',
       }}
     />
   );
