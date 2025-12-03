@@ -18,25 +18,43 @@ export default function ExperienceCard({ experience, index, inView }: Experience
       initial={{ opacity: 0, x: -50 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ delay: 0.2 * index, duration: 0.6 }}
-      className="relative"
+      className="relative group"
     >
       {/* Timeline Dot */}
-      <div className="absolute left-0 top-0 w-8 h-8 bg-matrix-dark border-4 border-matrix-green rounded-full flex items-center justify-center">
-        <div className="w-3 h-3 bg-matrix-green rounded-full animate-pulse"></div>
-      </div>
+      <motion.div
+        className="absolute left-0 top-0 w-8 h-8 bg-matrix-dark border-4 border-matrix-green rounded-full flex items-center justify-center"
+        whileHover={{ scale: 1.2 }}
+      >
+        <motion.div
+          className="w-3 h-3 bg-matrix-green rounded-full"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [1, 0.7, 1],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        ></motion.div>
+      </motion.div>
 
       {/* Level Badge */}
       <motion.div
-        initial={{ scale: 0 }}
-        animate={inView ? { scale: 1 } : {}}
-        transition={{ delay: 0.3 + 0.2 * index, type: 'spring' }}
-        className="absolute -left-2 -top-2 bg-pixel-red text-ghost font-pixel text-xs px-2 py-1 rounded z-10"
+        initial={{ scale: 0, rotate: -180 }}
+        animate={inView ? { scale: 1, rotate: 0 } : {}}
+        transition={{ delay: 0.3 + 0.2 * index, type: 'spring', stiffness: 200 }}
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        className="absolute -left-2 -top-2 bg-pixel-red text-ghost font-pixel text-xs px-2 py-1 rounded z-10 shadow-lg shadow-pixel-red/50"
       >
         LVL {experience.level}
       </motion.div>
 
       {/* Card Content */}
-      <div className="ml-12 terminal-window mb-8">
+      <motion.div
+        className="ml-12 terminal-window mb-8 transition-all duration-300"
+        whileHover={{ scale: 1.02 }}
+      >
         <div className="terminal-header">
           <div className="terminal-button red"></div>
           <div className="terminal-button yellow"></div>
@@ -125,7 +143,7 @@ export default function ExperienceCard({ experience, index, inView }: Experience
             </div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
