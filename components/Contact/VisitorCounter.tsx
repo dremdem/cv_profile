@@ -14,7 +14,8 @@ export default function VisitorCounter({ goatCounterCode, inView }: VisitorCount
   }
 
   // GoatCounter SVG counter URL
-  const counterUrl = `https://${goatCounterCode}.goatcounter.com/counter//.svg`;
+  // Format: https://[code].goatcounter.com/counter/.svg for site-wide total
+  const counterUrl = `https://${goatCounterCode}.goatcounter.com/counter/.svg`;
 
   return (
     <motion.div
