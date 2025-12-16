@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -18,6 +19,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const goatCounterCode = process.env.NEXT_PUBLIC_GOATCOUNTER_CODE;
+
   return (
     <html lang="en">
       <head>
@@ -26,6 +29,15 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         {children}
+
+        {/* GoatCounter Analytics - only loads if configured */}
+        {goatCounterCode && (
+          <Script
+            data-goatcounter={`https://${goatCounterCode}.goatcounter.com/count`}
+            src="//gc.zgo.at/count.js"
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   )

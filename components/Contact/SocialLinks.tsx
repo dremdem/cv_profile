@@ -58,7 +58,7 @@ export default function SocialLinks({ inView }: SocialLinksProps) {
     <div className="space-y-3">
       {socialLinks.map((link, index) => (
         <motion.a
-          key={link.label}
+          key={link.command}
           href={link.url}
           target={link.url.startsWith('http') ? '_blank' : undefined}
           rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
