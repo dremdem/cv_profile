@@ -430,6 +430,194 @@ Before implementation, please clarify:
 
 ---
 
+## Implementation Details
+
+### Status: ✅ IMPLEMENTED (Configuration Required)
+
+The GoatCounter integration has been fully implemented and is ready to use. The implementation is **optional** - the site works normally without it, and tracking only activates when configured.
+
+### Files Changed
+
+1. **`app/layout.tsx`**
+   - Added GoatCounter tracking script using Next.js `Script` component
+   - Conditional rendering based on environment variable
+   - Script loads with `afterInteractive` strategy for optimal performance
+
+2. **`components/Contact/Contact.tsx`**
+   - Added environment variable retrieval
+   - Integrated VisitorCounter component
+
+3. **`components/Contact/VisitorCounter.tsx`** (NEW)
+   - Custom component displaying visitor count badge
+   - Matrix-themed styling with glowing effects
+   - SVG image filter for green matrix aesthetic
+   - Terminal-style label: `> VISITORS_LOGGED: [counter]`
+
+4. **`.env.example`** (NEW)
+   - Configuration template
+   - Setup instructions
+
+### How It Works
+
+**1. Tracking Script (Invisible)**
+- Loaded in `layout.tsx` after page interactive
+- Sends anonymous pageview data to GoatCounter
+- ~3.5KB overhead, no cookies, no personal data
+
+**2. Visible Counter (Contact Section)**
+- Displays below "connection.established" line
+- Fetches live visitor count as SVG image
+- Styled with Matrix green theme and glow effects
+- Animated fade-in with Framer Motion (1.0s delay)
+
+**3. Environment Variable Control**
+- `NEXT_PUBLIC_GOATCOUNTER_CODE` - Your GoatCounter site code
+- If not set: site works normally, no tracking, no counter display
+- If set: tracking enabled + counter visible
+
+### Setup Instructions
+
+#### Step 1: Sign Up for GoatCounter
+
+1. Visit [goatcounter.com/signup](https://www.goatcounter.com/signup)
+2. Create a free account
+3. Choose a site code (e.g., `cv-profile`)
+   - This creates: `cv-profile.goatcounter.com`
+4. Complete registration
+
+#### Step 2: Configure Environment Variable
+
+**For Local Development:**
+```bash
+# Create .env.local file (not committed to git)
+cp .env.example .env.local
+
+# Edit .env.local and add your site code:
+NEXT_PUBLIC_GOATCOUNTER_CODE=cv-profile
+```
+
+**For Docker Deployment:**
+
+Option A: Build-time (rebuild required for changes)
+```dockerfile
+# Add to Dockerfile
+ENV NEXT_PUBLIC_GOATCOUNTER_CODE=cv-profile
+```
+
+Option B: Runtime (recommended - can change without rebuild)
+```bash
+# Add to docker run command
+docker run -e NEXT_PUBLIC_GOATCOUNTER_CODE=cv-profile ...
+
+# Or in docker-compose.yml:
+services:
+  app:
+    environment:
+      - NEXT_PUBLIC_GOATCOUNTER_CODE=cv-profile
+```
+
+Option C: Digital Ocean App Platform
+```bash
+# Add environment variable in Digital Ocean dashboard
+# Settings → App-Level Environment Variables
+NEXT_PUBLIC_GOATCOUNTER_CODE=cv-profile
+```
+
+#### Step 3: Build and Deploy
+
+```bash
+# Test locally
+npm run dev
+# Visit http://localhost:3000 and check Contact section
+
+# Build for production
+npm run build
+npm start
+
+# Or rebuild Docker image
+docker build -t cv-profile .
+```
+
+#### Step 4: Verify Installation
+
+1. **Check Counter Display:**
+   - Navigate to Contact section
+   - Look for `> VISITORS_LOGGED: [number]` line
+   - If missing, environment variable not set
+
+2. **Check Tracking:**
+   - Visit your site
+   - Go to GoatCounter dashboard: `https://cv-profile.goatcounter.com`
+   - Check if pageview was recorded (may take ~10 seconds)
+
+3. **Debug Issues:**
+   ```bash
+   # Check if env var is loaded
+   echo $NEXT_PUBLIC_GOATCOUNTER_CODE
+
+   # Check browser console for errors
+   # Open DevTools → Console → look for GoatCounter errors
+
+   # Verify tracking script loaded
+   # View page source → search for "goatcounter"
+   ```
+
+### Code Architecture
+
+**Privacy-First Design:**
+- ✅ No cookies used
+- ✅ No personal data collected
+- ✅ No fingerprinting
+- ✅ GDPR compliant (no consent banner needed)
+- ✅ Opt-in by design (requires explicit configuration)
+
+**Performance:**
+- Script loads after page interactive (doesn't block rendering)
+- SVG counter cached by browser
+- ~3.5KB JavaScript overhead
+- Minimal impact on Core Web Vitals
+
+**Maintainability:**
+- Single environment variable controls everything
+- No API keys or secrets needed
+- Can disable by removing env var
+- Easy to switch to self-hosted GoatCounter later
+
+### Counter Styling Details
+
+The visitor counter badge includes:
+- Terminal-style prefix: `> VISITORS_LOGGED:`
+- Matrix green text color
+- Glowing cyan background effect
+- Border with matrix green accent
+- CSS filters applied to SVG:
+  - `brightness(1.25)` - Brighter display
+  - `contrast(1.25)` - Enhanced visibility
+  - `hue-rotate(60deg)` - Shift to Matrix green
+  - `saturate(1.5)` - More vibrant color
+  - `pixelated` rendering for retro aesthetic
+
+### Self-Hosting Option (Future)
+
+The implementation is compatible with self-hosted GoatCounter:
+
+1. Deploy GoatCounter on your infrastructure
+2. Update environment variable to your domain:
+   ```bash
+   NEXT_PUBLIC_GOATCOUNTER_CODE=stats.yourdomain.com
+   ```
+3. No code changes required
+
+### Next Steps
+
+- [ ] Sign up for GoatCounter account
+- [ ] Configure environment variable
+- [ ] Deploy and verify counter appears
+- [ ] Monitor analytics dashboard
+- [ ] Optional: Customize counter styling if needed
+
+---
+
 ## Sources
 
 - [GoatCounter - Open Source Web Analytics](https://www.goatcounter.com)

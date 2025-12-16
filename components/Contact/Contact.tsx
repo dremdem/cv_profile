@@ -4,12 +4,16 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { personalInfo } from '@/lib/data/personal-info';
 import SocialLinks from './SocialLinks';
+import VisitorCounter from './VisitorCounter';
 
 export default function Contact() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  // Get GoatCounter code from environment variable
+  const goatCounterCode = process.env.NEXT_PUBLIC_GOATCOUNTER_CODE;
 
   return (
     <section id="contact" className="py-20 px-4 relative z-10">
@@ -98,6 +102,9 @@ export default function Contact() {
               <span>{'>'} connection.established</span>
               <span className="animate-blink ml-1">_</span>
             </motion.div>
+
+            {/* Visitor Counter */}
+            <VisitorCounter goatCounterCode={goatCounterCode} inView={inView} />
           </div>
         </motion.div>
 
