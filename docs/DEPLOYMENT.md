@@ -19,16 +19,19 @@ This guide describes the complete deployment workflow for the CV Profile applica
 ## Overview
 
 **Deployment Architecture:**
-```
-GitHub Repo (master)
-    ↓ (manual trigger)
-GitHub Actions
-    ↓ (build & push)
-GHCR (ghcr.io/dremdem/cv_profile:latest)
-    ↓ (docker pull)
-Digital Ocean Droplet
-    ↓ (nginx reverse proxy)
-Public Internet (HTTPS)
+
+```mermaid
+graph TD
+    A[GitHub Repo<br/>master branch] -->|manual trigger| B[GitHub Actions<br/>Docker Release Workflow]
+    B -->|build & push| C[GHCR<br/>ghcr.io/dremdem/cv_profile:latest]
+    C -->|docker pull| D[Digital Ocean Droplet<br/>Docker Container]
+    D -->|nginx reverse proxy| E[Public Internet<br/>HTTPS]
+
+    style A fill:#2ea44f,stroke:#1b6635,color:#fff
+    style B fill:#1f6feb,stroke:#0969da,color:#fff
+    style C fill:#6e40c9,stroke:#553098,color:#fff
+    style D fill:#0969da,stroke:#0550ae,color:#fff
+    style E fill:#57606a,stroke:#424a53,color:#fff
 ```
 
 **Key Principles:**
