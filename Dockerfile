@@ -14,11 +14,16 @@ RUN npm ci
 FROM node:18-alpine AS builder
 WORKDIR /app
 
+# Accept build arguments for Next.js public environment variables
+ARG NEXT_PUBLIC_GOATCOUNTER_CODE
+ENV NEXT_PUBLIC_GOATCOUNTER_CODE=${NEXT_PUBLIC_GOATCOUNTER_CODE}
+
 # Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Build the application
+# NEXT_PUBLIC_* environment variables will be embedded in the bundle
 RUN npm run build
 
 # Stage 3: Runner

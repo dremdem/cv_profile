@@ -485,82 +485,120 @@ The GoatCounter integration has been fully implemented and is ready to use. The 
    - This creates: `cv-profile.goatcounter.com`
 4. Complete registration
 
-#### Step 2: Configure Environment Variable
+#### Step 2: Configure GitHub Secret
 
-**For Local Development:**
+**IMPORTANT:** `NEXT_PUBLIC_*` environment variables must be set at **build time**, not runtime.
+
+**Add GitHub Repository Secret:**
+
+1. Go to repository **Settings** → **Secrets and variables** → **Actions**
+2. Click **New repository secret**
+3. Name: `GOATCOUNTER_CODE`
+4. Value: Your GoatCounter site code (e.g., `dremdem`)
+5. Click **Add secret**
+
+**How it works:**
+- GitHub Actions workflow reads `secrets.GOATCOUNTER_CODE`
+- Passes it as `--build-arg` during Docker build
+- Dockerfile accepts it as `ARG` and sets as `ENV`
+- Next.js embeds it into JavaScript bundle during build
+- Counter appears on production site
+
+#### Step 3: Trigger Build from Master
+
+**Build the Docker image with the secret:**
+
+1. Ensure your changes are merged to `master` branch
+2. Go to **Actions** tab on GitHub
+3. Select **"Docker Release"** workflow
+4. Click **"Run workflow"** dropdown
+5. Ensure `master` branch is selected
+6. Click **"Run workflow"** button
+7. Wait for build to complete (~2-5 minutes)
+
+**The workflow will:**
+- Checkout master branch
+- Build Docker image with `GOATCOUNTER_CODE` secret
+- Push to `ghcr.io/dremdem/cv_profile:latest`
+- Image now contains embedded GoatCounter configuration
+
+#### Step 4: Deploy to Production
+
+**Pull and restart on Digital Ocean droplet:**
+
+```bash
+# SSH to your droplet
+ssh root@your-droplet-ip
+
+# Pull the new image with embedded secret
+docker pull ghcr.io/dremdem/cv_profile:latest
+
+# Stop and remove old container
+docker stop cv-profile
+docker rm cv-profile
+
+# Start new container (no -e flag needed!)
+docker run -d \
+  --name cv-profile \
+  --restart unless-stopped \
+  -p 127.0.0.1:3000:3000 \
+  ghcr.io/dremdem/cv_profile:latest
+
+# Verify
+docker logs cv-profile
+```
+
+#### Step 5: Local Development
+
+**For local testing only:**
+
 ```bash
 # Create .env.local file (not committed to git)
 cp .env.example .env.local
 
 # Edit .env.local and add your site code:
-NEXT_PUBLIC_GOATCOUNTER_CODE=cv-profile
-```
+NEXT_PUBLIC_GOATCOUNTER_CODE=your-site-code
 
-**For Docker Deployment:**
-
-Option A: Build-time (rebuild required for changes)
-```dockerfile
-# Add to Dockerfile
-ENV NEXT_PUBLIC_GOATCOUNTER_CODE=cv-profile
-```
-
-Option B: Runtime (recommended - can change without rebuild)
-```bash
-# Add to docker run command
-docker run -e NEXT_PUBLIC_GOATCOUNTER_CODE=cv-profile ...
-
-# Or in docker-compose.yml:
-services:
-  app:
-    environment:
-      - NEXT_PUBLIC_GOATCOUNTER_CODE=cv-profile
-```
-
-Option C: Digital Ocean App Platform
-```bash
-# Add environment variable in Digital Ocean dashboard
-# Settings → App-Level Environment Variables
-NEXT_PUBLIC_GOATCOUNTER_CODE=cv-profile
-```
-
-#### Step 3: Build and Deploy
-
-```bash
-# Test locally
+# Run dev server
 npm run dev
 # Visit http://localhost:3000 and check Contact section
-
-# Build for production
-npm run build
-npm start
-
-# Or rebuild Docker image
-docker build -t cv-profile .
 ```
 
-#### Step 4: Verify Installation
+#### Step 6: Verify Installation
+
+**After deployment, verify the counter is working:**
 
 1. **Check Counter Display:**
-   - Navigate to Contact section
+   - Visit your production site (e.g., https://dremdem.ru/)
+   - Scroll to Contact section
    - Look for `> VISITORS_LOGGED: [number]` line
-   - If missing, environment variable not set
+   - Counter should show visitor count badge
 
 2. **Check Tracking:**
-   - Visit your site
-   - Go to GoatCounter dashboard: `https://cv-profile.goatcounter.com`
-   - Check if pageview was recorded (may take ~10 seconds)
+   - Visit your site a few times
+   - Go to GoatCounter dashboard: `https://your-code.goatcounter.com`
+   - Check if pageviews are being recorded (may take ~10 seconds)
+   - Verify stats are updating
 
 3. **Debug Issues:**
-   ```bash
-   # Check if env var is loaded
-   echo $NEXT_PUBLIC_GOATCOUNTER_CODE
 
-   # Check browser console for errors
-   # Open DevTools → Console → look for GoatCounter errors
+   **If counter not showing:**
+   ```bash
+   # Check if build included the secret
+   # Look at build logs in GitHub Actions
+
+   # Check browser console for GoatCounter errors
+   # Open DevTools → Console → filter "goatcounter"
 
    # Verify tracking script loaded
    # View page source → search for "goatcounter"
+   # Should see: <script data-goatcounter="https://your-code.goatcounter.com/count"
    ```
+
+   **If counter shows but doesn't track:**
+   - Check GoatCounter dashboard for errors
+   - Verify site code matches in secret and GoatCounter account
+   - Check browser ad blockers (may block GoatCounter)
 
 ### Code Architecture
 
