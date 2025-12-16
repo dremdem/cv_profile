@@ -17,6 +17,7 @@ A personal portfolio landing page combining Matrix movie aesthetics with 8-bit g
 - [Development Phases](#-development-phases)
 - [Customization](#-customization)
 - [Deployment](#-deployment)
+- [Documentation](#-documentation)
 - [License](#-license)
 - [Easter Eggs](#-easter-eggs)
 
@@ -83,7 +84,11 @@ cv_profile/
 │   ├── matrix.css       # Matrix-specific effects
 │   ├── retro.css        # 8-bit retro styles
 │   └── animations.css   # Custom animations
-└── LANDING_PAGE_PLAN.md # Full design and implementation plan
+└── docs/                # Documentation
+    ├── DEPLOYMENT.md            # Deployment guide
+    ├── LANDING_PAGE_PLAN.md     # Design plan
+    ├── COUNTER_SOLUTIONS.md     # Analytics solutions
+    └── CLAUDE.md                # Claude Code guidelines
 ```
 
 ## 🎨 Design System
@@ -166,9 +171,28 @@ To customize the portfolio with your own information:
 
 ## 🌐 Deployment
 
-The easiest way to deploy is using [Vercel](https://vercel.com):
+This project is deployed to Digital Ocean using Docker and GitHub Container Registry (GHCR).
+
+**Quick Start:**
+1. Build Docker image from `master` branch (via GitHub Actions)
+2. Image pushed to `ghcr.io/dremdem/cv_profile:latest`
+3. Pull and run on Digital Ocean droplet
+4. Serve via nginx with SSL
+
+**For detailed deployment instructions**, see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+
+**Alternative**: Deploy to [Vercel](https://vercel.com) for instant hosting
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/dremdem/cv_profile)
+
+## 📚 Documentation
+
+Comprehensive documentation is available in the `/docs` folder:
+
+- **[DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Complete deployment guide (CI/CD, Digital Ocean setup, nginx, SSL)
+- **[LANDING_PAGE_PLAN.md](docs/LANDING_PAGE_PLAN.md)** - Design concept and implementation plan
+- **[COUNTER_SOLUTIONS.md](docs/COUNTER_SOLUTIONS.md)** - Visitor counter/analytics research and implementation
+- **[CLAUDE.md](docs/CLAUDE.md)** - Guidelines for Claude Code development
 
 ## 📄 License
 

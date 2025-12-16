@@ -1,10 +1,12 @@
 # Deployment Guide for Digital Ocean
 
-This guide describes how to deploy the CV Profile application to a Digital Ocean droplet using Docker and nginx.
+This guide describes the complete deployment workflow for the CV Profile application, from building Docker images to deploying on a Digital Ocean droplet.
 
 ## Table of Contents
 
+- [Overview](#overview)
 - [Prerequisites](#prerequisites)
+- [CI/CD Workflow](#cicd-workflow)
 - [Part 1: Prepare Digital Ocean Droplet](#part-1-prepare-digital-ocean-droplet)
 - [Part 2: Pull Docker Image from GHCR](#part-2-pull-docker-image-from-ghcr)
 - [Part 3: Configure nginx](#part-3-configure-nginx)
@@ -14,12 +16,156 @@ This guide describes how to deploy the CV Profile application to a Digital Ocean
 
 ---
 
+## Overview
+
+**Deployment Architecture:**
+```
+GitHub Repo (master)
+    ↓ (manual trigger)
+GitHub Actions
+    ↓ (build & push)
+GHCR (ghcr.io/dremdem/cv_profile:latest)
+    ↓ (docker pull)
+Digital Ocean Droplet
+    ↓ (nginx reverse proxy)
+Public Internet (HTTPS)
+```
+
+**Key Principles:**
+- ✅ Build from `master` branch only (production-ready code)
+- ✅ Images pushed to GitHub Container Registry (GHCR)
+- ✅ Manual deployment trigger for control
+- ✅ Immutable Docker images with semantic versioning
+
+---
+
 ## Prerequisites
 
 - A Digital Ocean droplet running Ubuntu 20.04+ or Debian 11+
 - Root or sudo access to the droplet
 - A domain name pointing to your droplet's IP address
 - GitHub account with access to the cv_profile repository
+- Write permissions to the repository (for triggering workflows)
+
+---
+
+## CI/CD Workflow
+
+### Build from Master Only
+
+**Important:** Docker images should only be built from the `master` branch to ensure production deployments use stable, reviewed code.
+
+### Step 1: Trigger Docker Build
+
+The project uses GitHub Actions to build and push Docker images to GHCR (GitHub Container Registry).
+
+**To trigger a build:**
+
+1. Navigate to the repository on GitHub
+2. Go to **Actions** tab
+3. Select **"Docker Release"** workflow from the left sidebar
+4. Click **"Run workflow"** dropdown button
+5. **Ensure `master` branch is selected**
+6. Click **"Run workflow"** button
+
+**Workflow File:** `.github/workflows/docker-release.yml`
+
+### Step 2: Monitor Build Progress
+
+1. The workflow will appear in the Actions tab
+2. Click on the running workflow to see build logs
+3. Wait for all steps to complete (typically 2-5 minutes)
+4. Verify ✅ green checkmark appears
+
+**Build Steps:**
+- Checkout repository code
+- Set up Docker Buildx
+- Log in to GHCR
+- Extract Docker metadata
+- Build multi-platform image (linux/amd64)
+- Push image to `ghcr.io/dremdem/cv_profile:latest`
+- Verify and cache
+
+### Step 3: Verify Image in GHCR
+
+After successful build:
+
+1. Go to repository main page
+2. Click **"Packages"** on the right sidebar
+3. You should see `cv_profile` package
+4. Click on it to see image details and tags
+
+**Image URL:**
+```
+ghcr.io/dremdem/cv_profile:latest
+```
+
+### Workflow Configuration
+
+The Docker Release workflow (`docker-release.yml`):
+
+```yaml
+on:
+  workflow_dispatch:  # Manual trigger only
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: dremdem/cv_profile
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+```
+
+**Key Features:**
+- ✅ Manual dispatch (controlled deployment)
+- ✅ Pushes to GHCR automatically
+- ✅ Uses GitHub Actions cache for faster builds
+- ✅ Tags image as `latest`
+- ✅ Includes metadata (title, description, revision)
+
+### Best Practices
+
+1. **Always build from master**
+   - Merge PRs to master first
+   - Run workflow from master branch only
+   - Never build from feature branches for production
+
+2. **Verify before deploying**
+   - Check build logs for errors
+   - Confirm image appears in GHCR
+   - Test locally if possible: `docker pull ghcr.io/dremdem/cv_profile:latest`
+
+3. **Deployment sequence**
+   ```
+   1. Merge PR to master
+   2. Trigger Docker Release workflow
+   3. Wait for build completion
+   4. Pull image on droplet
+   5. Restart container
+   6. Verify deployment
+   ```
+
+### Automated Deployment Options
+
+**Option A: Manual (Current)**
+- Trigger workflow manually
+- SSH to droplet and pull new image
+- Restart container
+
+**Option B: Watchtower (Semi-Automated)**
+- Install Watchtower on droplet (see Part 5.3)
+- Watchtower checks for new images hourly
+- Automatically pulls and restarts
+
+**Option C: GitHub Actions CD (Fully Automated)**
+- Add deployment step to workflow
+- Use SSH action to update droplet
+- Requires SSH key setup in GitHub Secrets
 
 ---
 
