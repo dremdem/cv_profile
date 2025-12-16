@@ -130,6 +130,23 @@ jobs:
 - ✅ Uses GitHub Actions cache for faster builds
 - ✅ Tags image as `latest`
 - ✅ Includes metadata (title, description, revision)
+- ✅ Passes build-time secrets (e.g., `GOATCOUNTER_CODE`) as build arguments
+
+**Build Arguments:**
+
+The workflow passes repository secrets as Docker build arguments:
+
+```yaml
+build-args: |
+  BUILDKIT_INLINE_CACHE=1
+  NEXT_PUBLIC_GOATCOUNTER_CODE=${{ secrets.GOATCOUNTER_CODE }}
+```
+
+These get embedded into the Docker image during build. To add secrets:
+1. Go to **Settings** → **Secrets and variables** → **Actions**
+2. Add repository secret (e.g., `GOATCOUNTER_CODE`)
+3. Secret will be available in next build
+4. See [docs/COUNTER_SOLUTIONS.md](COUNTER_SOLUTIONS.md) for details
 
 ### Best Practices
 
