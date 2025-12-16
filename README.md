@@ -84,11 +84,11 @@ cv_profile/
 │   ├── matrix.css       # Matrix-specific effects
 │   ├── retro.css        # 8-bit retro styles
 │   └── animations.css   # Custom animations
-└── docs/                # Documentation
-    ├── DEPLOYMENT.md            # Deployment guide
-    ├── LANDING_PAGE_PLAN.md     # Design plan
-    ├── COUNTER_SOLUTIONS.md     # Analytics solutions
-    └── CLAUDE.md                # Claude Code guidelines
+├── docs/                # Documentation
+│   ├── DEPLOYMENT.md            # Deployment guide
+│   ├── LANDING_PAGE_PLAN.md     # Design plan
+│   └── COUNTER_SOLUTIONS.md     # Analytics solutions
+└── CLAUDE.md            # Claude Code guidelines (root level)
 ```
 
 ## 🎨 Design System
@@ -187,12 +187,14 @@ This project is deployed to Digital Ocean using Docker and GitHub Container Regi
 
 ## 📚 Documentation
 
-Comprehensive documentation is available in the `/docs` folder:
+Comprehensive documentation is available:
 
+- **[CLAUDE.md](CLAUDE.md)** - Guidelines for Claude Code development (root level)
 - **[DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Complete deployment guide (CI/CD, Digital Ocean setup, nginx, SSL)
 - **[LANDING_PAGE_PLAN.md](docs/LANDING_PAGE_PLAN.md)** - Design concept and implementation plan
 - **[COUNTER_SOLUTIONS.md](docs/COUNTER_SOLUTIONS.md)** - Visitor counter/analytics research and implementation
-- **[CLAUDE.md](docs/CLAUDE.md)** - Guidelines for Claude Code development
+
+See [docs/README.md](docs/README.md) for detailed documentation index.
 
 ## 📄 License
 

@@ -52,13 +52,14 @@ Contains research, recommendations, and complete implementation guide for visito
 
 ---
 
-### [CLAUDE.md](CLAUDE.md) - Claude Code Guidelines
-**Instructions for Claude Code when working on this project**
+### [CLAUDE.md](../CLAUDE.md) - Claude Code Guidelines ⚙️
+**Instructions for Claude Code when working on this project** (located in root)
 
 Topics covered:
 - Git workflow (feature branches, PRs)
 - CI check requirements
-- Code review process
+- Documentation standards (Mermaid.js for diagrams)
+- PR discussion and comment management
 
 This file provides context to Claude Code for maintaining consistent development practices.
 
