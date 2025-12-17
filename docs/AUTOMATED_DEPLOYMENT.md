@@ -348,7 +348,7 @@ Watch the workflow execution:
 SSH to your droplet and check deployment logs:
 
 ```bash
-ssh github-deploy@YOUR_DROPLET_IP "tail -50 /var/log/cv-profile-deploy.log"
+ssh github-deploy@YOUR_DROPLET_IP "tail -50 ~/cv_profile/deploy.log"
 ```
 
 **Expected output:**
@@ -521,15 +521,15 @@ EOF
 
 ### Issue: Deployment logs not found
 
-**Error:** `/var/log/cv-profile-deploy.log: No such file or directory`
+**Error:** `~/cv_profile/deploy.log: No such file or directory`
 
 **Solution:**
-Create log file (requires root):
-```bash
-ssh root@YOUR_DROPLET_IP "touch /var/log/cv-profile-deploy.log && chmod 666 /var/log/cv-profile-deploy.log"
-```
+The log file is created automatically by the deployment script in the user's home directory. If it's missing, it will be created on the next deployment run.
 
-**Note:** Log file needs world-writable permissions (666) so `github-deploy` user can write to it.
+To check if it exists:
+```bash
+ssh github-deploy@YOUR_DROPLET_IP "ls -la ~/cv_profile/deploy.log"
+```
 
 ---
 
@@ -584,7 +584,7 @@ EOF
 
 ```bash
 # View recent deployments
-ssh github-deploy@YOUR_DROPLET_IP "tail -100 /var/log/cv-profile-deploy.log"
+ssh github-deploy@YOUR_DROPLET_IP "tail -100 ~/cv_profile/deploy.log"
 
 # Check container status
 ssh github-deploy@YOUR_DROPLET_IP "docker ps -f name=cv-profile"
@@ -692,6 +692,6 @@ If you encounter issues not covered in this guide:
 
 **Log Locations:**
 - GitHub Actions: Repository → Actions → Workflow run
-- Deployment: `/var/log/cv-profile-deploy.log` on droplet
+- Deployment: `~/cv_profile/deploy.log` on droplet
 - Application: `docker logs cv-profile` on droplet
 - Nginx: `/var/log/nginx/error.log` on droplet
