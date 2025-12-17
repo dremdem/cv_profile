@@ -6,7 +6,8 @@
 set -e  # Exit on error
 
 # Configuration
-COMPOSE_FILE="/root/cv_profile/docker-compose.yml"
+DEPLOY_USER="github-deploy"
+COMPOSE_FILE="/home/${DEPLOY_USER}/cv_profile/docker-compose.yml"
 LOG_FILE="/var/log/cv-profile-deploy.log"
 MAX_HEALTH_CHECK_WAIT=60  # seconds
 HEALTH_CHECK_INTERVAL=5   # seconds
@@ -36,7 +37,7 @@ log "Starting CV Profile deployment"
 log "========================================="
 
 # Change to project directory
-cd /root/cv_profile || {
+cd "/home/${DEPLOY_USER}/cv_profile" || {
     log_error "Failed to change to project directory"
     exit 1
 }

@@ -208,9 +208,12 @@ The automated deployment requires three GitHub Secrets to be configured:
 
 | Secret Name | Description | Example |
 |-------------|-------------|---------|
-| `DROPLET_SSH_KEY` | Private SSH key for droplet access | Contents of `id_ed25519` file |
+| `DROPLET_SSH_KEY` | Private SSH key for droplet access | Contents of `github-actions-deploy` private key |
 | `DROPLET_HOST` | Droplet IP address or hostname | `134.122.xx.xx` or `dremdem.ru` |
-| `DROPLET_USER` | SSH username (usually root) | `root` |
+| `DROPLET_USER` | Deployment user (non-root) | `github-deploy` |
+
+**Security Note:**
+This deployment uses a **dedicated non-root user** (`github-deploy`) with Docker group membership for improved security. The deployment user cannot access system files, install software, or perform privileged operations - limiting the blast radius if credentials are compromised.
 
 **📚 For detailed setup instructions, see:** [AUTOMATED_DEPLOYMENT.md](AUTOMATED_DEPLOYMENT.md)
 

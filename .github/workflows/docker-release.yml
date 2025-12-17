@@ -80,24 +80,24 @@ jobs:
       - name: Create deployment directory on droplet
         run: |
           ssh -i ~/.ssh/id_ed25519 ${{ secrets.DROPLET_USER }}@${{ secrets.DROPLET_HOST }} \
-            "mkdir -p /root/cv_profile"
+            "mkdir -p ~/cv_profile"
 
       - name: Copy docker-compose.yml to droplet
         run: |
           scp -i ~/.ssh/id_ed25519 docker-compose.yml \
-            ${{ secrets.DROPLET_USER }}@${{ secrets.DROPLET_HOST }}:/root/cv_profile/
+            ${{ secrets.DROPLET_USER }}@${{ secrets.DROPLET_HOST }}:~/cv_profile/
 
       - name: Copy deployment script to droplet
         run: |
           scp -i ~/.ssh/id_ed25519 deploy.sh \
-            ${{ secrets.DROPLET_USER }}@${{ secrets.DROPLET_HOST }}:/root/cv_profile/
+            ${{ secrets.DROPLET_USER }}@${{ secrets.DROPLET_HOST }}:~/cv_profile/
           ssh -i ~/.ssh/id_ed25519 ${{ secrets.DROPLET_USER }}@${{ secrets.DROPLET_HOST }} \
-            "chmod +x /root/cv_profile/deploy.sh"
+            "chmod +x ~/cv_profile/deploy.sh"
 
       - name: Run deployment
         run: |
           ssh -i ~/.ssh/id_ed25519 ${{ secrets.DROPLET_USER }}@${{ secrets.DROPLET_HOST }} \
-            "/root/cv_profile/deploy.sh"
+            "~/cv_profile/deploy.sh"
 
       - name: Verify deployment
         run: |
