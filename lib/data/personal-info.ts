@@ -11,7 +11,7 @@ export const personalInfo = {
   ],
   links: {
     github: "https://github.com/dremdem",
-    linkedin: "https://linkedin.com/in/vladimiryakovenko-7b666686",
+    linkedin: "https://www.linkedin.com/in/vladimir-yakovenko-7b666686",
     telegram: "https://t.me/dremdem",
     upwork: "https://www.upwork.com/o/profiles/users/_~011110ba92bf30ec2d/"
   },
