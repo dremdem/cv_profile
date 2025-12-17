@@ -64,6 +64,12 @@ if ! docker-compose pull; then
 fi
 log "Image pulled successfully"
 
+# Stop old container if it exists (to avoid name conflict)
+if [ -n "$CURRENT_CONTAINER" ]; then
+    log "Stopping current container: $CURRENT_CONTAINER"
+    docker stop "$CURRENT_CONTAINER" || log_warning "Failed to stop container"
+fi
+
 # Deploy new container
 log "Deploying new container..."
 if ! docker-compose up -d; then
