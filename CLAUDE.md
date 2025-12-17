@@ -5,15 +5,118 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Important Notes
 
 ### Git Workflow
-- **NEVER push directly to the master branch**
-- Always create a feature branch for your changes
-- Push to the feature branch and create a Pull Request
+
+#### Core Rules (NO EXCEPTIONS)
+
+**RULE #1: NEVER push directly to the master branch**
+
+This rule applies to:
+- ❌ Bug fixes (even one-line fixes)
+- ❌ Typo corrections
+- ❌ Documentation updates
+- ❌ Emergency hotfixes
+- ❌ Follow-up changes to merged PRs
+- ❌ "Small" changes
+- ❌ "Quick" fixes
+- ❌ ANY change, regardless of size or urgency
+
+**There are ZERO exceptions to this rule.**
+
+#### Required Workflow for ALL Changes
+
+```bash
+# 1. Start from updated master
+git checkout master
+git pull origin master
+
+# 2. Create feature branch
+git checkout -b feature/issue-XX-description
+# or: fix/bug-description
+# or: docs/topic-description
+
+# 3. Make your changes
+# ... edit files ...
+
+# 4. Commit to feature branch
+git add <files>
+git commit -m "type: description"
+
+# 5. Push feature branch (NOT master!)
+git push -u origin feature/issue-XX-description
+
+# 6. Create Pull Request
+gh pr create --title "..." --body "..."
+
+# 7. Wait for review and approval
+# Human reviewer merges to master
+```
+
+#### Why This Rule Exists
+
+- **Code Review:** All changes must be reviewed by humans
+- **Quality Control:** Prevents breaking changes from reaching production
+- **Audit Trail:** Every change traceable through PR history
+- **CI/CD:** Allows automated checks to run before merge
+- **Team Collaboration:** Enables discussion and feedback
+- **Rollback Safety:** Easy to revert if issues found
+
+#### Common Mistakes to Avoid
+
+**❌ WRONG:**
+```bash
+git checkout master
+# ... make changes ...
+git commit -m "quick fix"
+git push origin master  # ← VIOLATION!
+```
+
+**✅ CORRECT:**
+```bash
+git checkout -b fix/quick-fix
+# ... make changes ...
+git commit -m "fix: description"
+git push origin fix/quick-fix  # ← Correct!
+gh pr create ...
+```
+
+#### What To Do If You Accidentally Push to Master
+
+If you realize you pushed to master:
+
+```bash
+# 1. Immediately notify the team
+# 2. Consider reverting the commit:
+git checkout master
+git revert <commit-hash>
+git push origin master
+
+# 3. Create proper PR with the fix:
+git checkout -b fix/proper-implementation
+git cherry-pick <commit-hash>
+git push origin fix/proper-implementation
+gh pr create ...
+
+# 4. Document the incident in the PR description
+```
+
+#### Branch Naming Conventions
+
+- `feature/issue-XX-description` - New features
+- `fix/issue-XX-description` - Bug fixes
+- `docs/topic-description` - Documentation updates
+- `refactor/component-name` - Code refactoring
+- `test/feature-name` - Test additions
+
+#### PR Requirements
+
 - **ALWAYS check CI checks after pushing code**
   - Go to the PR page on GitHub
   - Verify all workflow checks are passing (green checkmarks)
   - If checks fail, review the error logs and fix issues before requesting review
 - Wait for CI checks to pass before merging
 - All changes must go through the PR review process
+- Link related issues using "Fixes #XX" or "Addresses #XX"
+- Provide clear description of what changed and why
 
 ### Documentation Standards
 - **Use Mermaid.js for diagrams** - All architecture diagrams, flowcharts, and technical diagrams should be created using Mermaid.js syntax
