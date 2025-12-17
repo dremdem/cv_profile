@@ -64,10 +64,12 @@ if ! docker-compose pull; then
 fi
 log "Image pulled successfully"
 
-# Stop old container if it exists (to avoid name conflict)
+# Stop and remove old container if it exists (to avoid name conflict)
 if [ -n "$CURRENT_CONTAINER" ]; then
     log "Stopping current container: $CURRENT_CONTAINER"
     docker stop "$CURRENT_CONTAINER" || log_warning "Failed to stop container"
+    log "Removing old container: $CURRENT_CONTAINER"
+    docker rm "$CURRENT_CONTAINER" || log_warning "Failed to remove container"
 fi
 
 # Deploy new container
@@ -75,10 +77,14 @@ log "Deploying new container..."
 if ! docker-compose up -d; then
     log_error "Failed to start new container"
 
-    # Rollback if we had a previous container
-    if [ -n "$CURRENT_CONTAINER" ]; then
-        log "Attempting rollback to previous container..."
-        docker start "$CURRENT_CONTAINER" || log_error "Rollback failed!"
+    # Rollback if we had a previous image
+    if [ -n "$CURRENT_IMAGE" ]; then
+        log "Attempting rollback to previous image..."
+        docker run -d \
+            --name cv-profile \
+            --restart unless-stopped \
+            -p 127.0.0.1:3000:3000 \
+            "$CURRENT_IMAGE" || log_error "Rollback failed!"
     fi
 
     exit 1
