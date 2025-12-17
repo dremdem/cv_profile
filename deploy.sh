@@ -7,8 +7,9 @@ set -e  # Exit on error
 
 # Configuration
 DEPLOY_USER="github-deploy"
-COMPOSE_FILE="/home/${DEPLOY_USER}/cv_profile/docker-compose.yml"
-LOG_FILE="/var/log/cv-profile-deploy.log"
+PROJECT_DIR="/home/${DEPLOY_USER}/cv_profile"
+COMPOSE_FILE="${PROJECT_DIR}/docker-compose.yml"
+LOG_FILE="${PROJECT_DIR}/deploy.log"
 MAX_HEALTH_CHECK_WAIT=60  # seconds
 HEALTH_CHECK_INTERVAL=5   # seconds
 
