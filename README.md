@@ -171,15 +171,30 @@ To customize the portfolio with your own information:
 
 ## 🌐 Deployment
 
-This project is deployed to Digital Ocean using Docker and GitHub Container Registry (GHCR).
+This project features **fully automated deployment** to Digital Ocean using GitHub Actions, Docker Compose, and health-checked deployments with automatic rollback.
 
-**Quick Start:**
-1. Build Docker image from `master` branch (via GitHub Actions)
-2. Image pushed to `ghcr.io/dremdem/cv_profile:latest`
-3. Pull and run on Digital Ocean droplet
-4. Serve via nginx with SSL
+**Automated Deployment (Recommended):**
+1. Trigger GitHub Actions workflow
+2. Image automatically built and pushed to GHCR
+3. Deployment automatically runs on Digital Ocean droplet
+4. Health checks verify successful deployment
+5. Automatic rollback on failure
 
-**For detailed deployment instructions**, see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+**Deployment Flow:**
+```
+Trigger Workflow → Build Image → Push to GHCR → SSH Deploy → Health Check → Success ✅
+                                                                    ↓
+                                                              Rollback if Failed ⏪
+```
+
+**Setup Required:**
+- SSH keys configured in GitHub Secrets
+- Docker Compose on droplet
+- Automated deployment script
+
+**For detailed setup instructions**, see:
+- **[docs/AUTOMATED_DEPLOYMENT.md](docs/AUTOMATED_DEPLOYMENT.md)** - Complete automated deployment setup guide
+- **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Full deployment documentation
 
 **Alternative**: Deploy to [Vercel](https://vercel.com) for instant hosting
 
@@ -191,6 +206,7 @@ Comprehensive documentation is available:
 
 - **[CLAUDE.md](CLAUDE.md)** - Guidelines for Claude Code development (root level)
 - **[DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Complete deployment guide (CI/CD, Digital Ocean setup, nginx, SSL)
+- **[AUTOMATED_DEPLOYMENT.md](docs/AUTOMATED_DEPLOYMENT.md)** - Automated deployment setup guide (SSH keys, GitHub Actions, health checks)
 - **[LANDING_PAGE_PLAN.md](docs/LANDING_PAGE_PLAN.md)** - Design concept and implementation plan
 - **[COUNTER_SOLUTIONS.md](docs/COUNTER_SOLUTIONS.md)** - Visitor counter/analytics research and implementation
 
