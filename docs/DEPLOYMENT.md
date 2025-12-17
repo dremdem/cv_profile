@@ -7,6 +7,7 @@ This guide describes the complete deployment workflow for the CV Profile applica
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
 - [CI/CD Workflow](#cicd-workflow)
+  - [Automated Deployment](#automated-deployment-recommended)
 - [Part 1: Prepare Digital Ocean Droplet](#part-1-prepare-digital-ocean-droplet)
 - [Part 2: Pull Docker Image from GHCR](#part-2-pull-docker-image-from-ghcr)
 - [Part 3: Configure nginx](#part-3-configure-nginx)
@@ -170,22 +171,61 @@ These get embedded into the Docker image during build. To add secrets:
    6. Verify deployment
    ```
 
-### Automated Deployment Options
+### Automated Deployment (Recommended)
 
-**Option A: Manual (Current)**
-- Trigger workflow manually
-- SSH to droplet and pull new image
-- Restart container
+**Status:** ✅ Fully Implemented
 
-**Option B: Watchtower (Semi-Automated)**
-- Install Watchtower on droplet (see Part 5.3)
-- Watchtower checks for new images hourly
-- Automatically pulls and restarts
+The deployment process is now fully automated using GitHub Actions + Docker Compose + deployment script with health checks and automatic rollback.
 
-**Option C: GitHub Actions CD (Fully Automated)**
-- Add deployment step to workflow
-- Use SSH action to update droplet
-- Requires SSH key setup in GitHub Secrets
+**How it works:**
+
+1. **Trigger workflow** → GitHub Actions builds & pushes image to GHCR
+2. **Automated deployment** → GitHub Actions SSH to droplet and runs deployment script
+3. **Health checks** → Script verifies new container is healthy before completing
+4. **Automatic rollback** → If deployment fails, automatically reverts to previous version
+
+**Deployment Flow:**
+
+```mermaid
+graph LR
+    A[Trigger Workflow] --> B[Build Image]
+    B --> C[Push to GHCR]
+    C --> D[SSH to Droplet]
+    D --> E[Run deploy.sh]
+    E --> F{Health Check}
+    F -->|Pass| G[Success ✅]
+    F -->|Fail| H[Rollback ⏪]
+    H --> I[Previous Version Running]
+
+    style A fill:#2ea44f,stroke:#1b6635,color:#fff
+    style G fill:#2ea44f,stroke:#1b6635,color:#fff
+    style H fill:#cf222e,stroke:#a40e26,color:#fff
+```
+
+**Setup Requirements:**
+
+The automated deployment requires three GitHub Secrets to be configured:
+
+| Secret Name | Description | Example |
+|-------------|-------------|---------|
+| `DROPLET_SSH_KEY` | Private SSH key for droplet access | Contents of `id_ed25519` file |
+| `DROPLET_HOST` | Droplet IP address or hostname | `134.122.xx.xx` or `dremdem.ru` |
+| `DROPLET_USER` | SSH username (usually root) | `root` |
+
+**📚 For detailed setup instructions, see:** [AUTOMATED_DEPLOYMENT.md](AUTOMATED_DEPLOYMENT.md)
+
+**Key Features:**
+- ✅ Zero-touch deployment (just trigger workflow)
+- ✅ Health check verification (60s timeout)
+- ✅ Automatic rollback on failure
+- ✅ Deployment logging (`/var/log/cv-profile-deploy.log`)
+- ✅ Old image cleanup (keeps last 3 images)
+- ✅ Only deploys from `master` branch
+
+**Files Involved:**
+- `docker-compose.yml` - Container configuration with health checks
+- `deploy.sh` - Deployment script with rollback logic
+- `.github/workflows/docker-release.yml` - Workflow with deploy job
 
 ---
 
