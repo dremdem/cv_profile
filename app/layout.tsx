@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'CV Profile | Matrix × 8-Bit Portfolio',
   description: 'A personal portfolio landing page combining Matrix movie aesthetics with 8-bit gaming style',
   keywords: ['portfolio', 'developer', 'matrix', '8-bit', 'retro'],
-  authors: [{ name: 'Your Name' }],
+  authors: [{ name: 'Vladimir Yakovenko' }],
   openGraph: {
     title: 'CV Profile | Matrix × 8-Bit Portfolio',
     description: 'A personal portfolio landing page combining Matrix movie aesthetics with 8-bit gaming style',

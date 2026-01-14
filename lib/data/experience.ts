@@ -17,12 +17,11 @@ export const experiences: Experience[] = [
     startDate: "Dec 2022",
     endDate: "Present",
     achievements: [
-      "Combining causal AI with intelligent automation for enterprise decision-making",
-      "Backend development with FastAPI and Python 3.10+",
+      "Developed FastAPI microservices and ETL pipelines, reducing processing time by 35%",
+      "Architected CI/CD workflows achieving 95% test coverage",
       "Data processing pipelines using Pandas and NumPy",
       "Built Dash applications for data visualization",
-      "Managed AWS ECS deployments and S3 storage",
-      "Implemented CI/CD with GitHub Actions"
+      "Managed AWS ECS deployments and S3 storage"
     ],
     technologies: ["FastAPI", "Python 3.10+", "Docker", "AWS ECS", "AWS S3", "Pandas", "NumPy", "Dash", "GitHub Actions"],
     level: 10
@@ -34,9 +33,9 @@ export const experiences: Experience[] = [
     startDate: "May 2022",
     endDate: "Dec 2022",
     achievements: [
-      "Platform automating physician workflows",
-      "Developed FastAPI endpoints for healthcare automation",
-      "Designed MySQL database models and Elasticsearch integration",
+      "Built FastAPI endpoints serving 100+ healthcare providers",
+      "Optimized Elasticsearch queries, improving performance by 40%",
+      "Designed MySQL database models for healthcare automation",
       "Administered Kubernetes clusters for production workloads"
     ],
     technologies: ["FastAPI", "Python", "MySQL", "Elasticsearch", "Kubernetes"],
@@ -49,8 +48,8 @@ export const experiences: Experience[] = [
     startDate: "Aug 2021",
     endDate: "May 2022",
     achievements: [
-      "Dental insurance revenue cycle management platform (zentist.io)",
-      "Built GraphQL backend services",
+      "Constructed GraphQL APIs processing 10,000+ insurance claims monthly",
+      "Integrated 15+ third-party services for dental insurance workflows",
       "Developed Flask APIs with MySQL integration",
       "Managed Kubernetes deployments"
     ],
@@ -64,9 +63,9 @@ export const experiences: Experience[] = [
     startDate: "Sep 2020",
     endDate: "Aug 2021",
     achievements: [
-      "Machine learning data platform development",
+      "Developed REST API client library for 20+ institutional clients",
+      "Managed Airflow DAGs orchestrating 30+ jobs",
       "Built ETL pipelines with Python and Pandas",
-      "Managed Airflow DAGs for workflow orchestration",
       "Containerized applications with Docker"
     ],
     technologies: ["Python", "Pandas", "Docker", "Airflow"],
