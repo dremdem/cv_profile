@@ -42,8 +42,8 @@ export default function SocialLinks({ inView }: SocialLinksProps) {
     },
     {
       command: 'cv-pdf',
-      label: 'yakovenko_python_en.pdf',
-      url: 'https://github.com/dremdem/cv/blob/master/yakovenko_python_en.pdf',
+      label: 'yakovenko_python_en_latest.pdf',
+      url: 'https://github.com/dremdem/cv/blob/master/yakovenko_python_en_latest.pdf',
       icon: '📄',
     },
     {
