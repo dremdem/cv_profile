@@ -9,6 +9,7 @@ export const skills: Skill[] = [
   { name: "Python", level: 95, category: "language" },
   { name: "SQL", level: 75, category: "language" },
   { name: "JavaScript", level: 30, category: "language" },
+  { name: "TypeScript", level: 40, category: "language" },
 
   // Frameworks & Libraries
   { name: "Django", level: 90, category: "framework" },
@@ -18,6 +19,8 @@ export const skills: Skill[] = [
   { name: "GraphQL", level: 85, category: "framework" },
   { name: "Pandas", level: 85, category: "framework" },
   { name: "NumPy", level: 80, category: "framework" },
+  { name: "React", level: 35, category: "framework" },
+  { name: "Next.js", level: 35, category: "framework" },
 
   // Databases
   { name: "PostgreSQL", level: 90, category: "database" },
@@ -33,6 +36,8 @@ export const skills: Skill[] = [
   { name: "Kubernetes", level: 80, category: "tool" },
   { name: "AWS ECS", level: 85, category: "tool" },
   { name: "AWS S3", level: 85, category: "tool" },
+  { name: "AWS Lambda", level: 80, category: "tool" },
+  { name: "GCP", level: 75, category: "tool" },
   { name: "Linux", level: 90, category: "tool" },
   { name: "Bash", level: 85, category: "tool" },
   { name: "Git", level: 90, category: "tool" },
