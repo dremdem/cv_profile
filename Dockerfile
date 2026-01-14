@@ -32,6 +32,9 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
+# Install wget for Docker health checks (not included in Alpine by default)
+RUN apk add --no-cache wget
+
 # Create a non-root user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
