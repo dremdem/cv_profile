@@ -50,6 +50,15 @@ export const projects: Project[] = [
 
   // Personal / Pet Projects
   {
+    id: "proj-9",
+    name: "Job Radar",
+    description: "Local-first job search assistant: collects vacancies from a dozen sources, scores them with explained rules and adds a Claude analysis whose quotes are checked against the vacancy text",
+    technologies: ["Python", "FastAPI", "HTMX", "SQLite", "Claude"],
+    icon: "📡",
+    category: "pet-project",
+    githubUrl: "https://github.com/dremdem/job-radar"
+  },
+  {
     id: "proj-5",
     name: "Stupid Chat Bot",
     description: "AI-powered Telegram chatbot with web interface for interactive conversations",
